@@ -3,7 +3,7 @@ package Level1;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class solution02 {
+public class solution02 { 
 	
 	/*
 	 * [문제설명]
