@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class solution04_1 {
 	
 	public static String solution(String[] participant, String[] completion) {
-        String answer = "";
+        String answer = ""; 
         
         // HashMap ¼±¾ð!
         HashMap<String, Integer> hm = new HashMap<>();
