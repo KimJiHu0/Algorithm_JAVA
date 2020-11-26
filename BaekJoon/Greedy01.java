@@ -29,6 +29,8 @@ public class Greedy01 {
 		if(threekgna % 3 == 0) {
 			// threekgcount에 threekgna / 3한 값을 더해준다.
 			threekgcount += threekgna / 3;
+		} else if(threekgna == 2){
+			
 		} else {
 			// 그렇지 않으면 (나뉘어 떨어지지 않는다면) -1로 초기화해준다.
 			threekgcount = -1;
@@ -78,7 +80,7 @@ public class Greedy01 {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("배달할 봉지의 갯수 : " + Greedy(6));
+		System.out.println("배달할 봉지의 갯수 : " + Greedy(58));
 	}
 
 }
