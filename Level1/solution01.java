@@ -1,13 +1,12 @@
 package Level1;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class solution01 {
 	
 	/*
+	 * 정수 내림차순으로 배치하기
+	 * 
 	 * [문제설명]
 	 * 함수 solution은 정수 n을 매개변수로 입력받습니다.
 	 * n의 각 자릿수를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요.
@@ -22,33 +21,22 @@ public class solution01 {
 	 */
 	
 	public static long solution(long n) {
-	      long answer = 0;
-	      String a = n + "";
-	      char[] array = a.toString().toCharArray();
-	      char temp = 0;
-	      for (int i = 0; i < array.length; i++) {
-	         for (int j = 0; j < array.length; j++) {
-	            if (array[i] > array[j]) {
-	               temp = array[j];
-	               array[j] = array[i];
-	               array[i] = temp;      
-	            }
-	         }
-	      }
-	      a = new String(array);
-	      answer = Integer.parseInt(a);
+		  long answer = 0;
 	      
+		  String[] nArr = String.valueOf(n).split("");
+		  Arrays.sort(nArr);
+		  
+		  String nStr = "";
+		  for(int i = nArr.length-1; i >= 0; i--) {
+			  nStr += nArr[i];
+		  }
+		  answer = Integer.parseInt(nStr);
+		  
 	      return answer;
-	   }
+	}
 	
 	public static void main(String[] args) {
-		
-		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Scanner sc = new Scanner(System.in);
-		
-		long n = sc.nextLong();
-		
-		System.out.println(solution(n));
+		System.out.println(solution(118372));
 	}
 
 }
