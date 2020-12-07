@@ -2,7 +2,7 @@ package Level2;
 
 import java.util.Arrays;
 
-public class solution01 {
+public class solution01 { 
 
 	// ÃÖ´ñ°ª°ú ÃÖ¼Ú°ª
 
