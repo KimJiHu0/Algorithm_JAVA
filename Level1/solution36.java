@@ -91,14 +91,16 @@ public class solution37 {
         	max = answer2;
         	// answer배열에 2를 넣는다.
         	answer = new int[] {2};
-        // max보다 answer3가 크다면
-        } else if(max < answer3) {
+        }
+	// max보다 answer3가 크다면
+	if(max < answer3) {
         	// max에 answer3를 대입
         	max = answer3;
         	// answer배열에 3을 대입한다.
         	answer = new int[] {3};
-        // 그렇지않다면
-        } else {
+        }
+	// 그렇지않다면
+	if(max == answer1){
         	// answer배열에 1을 대입.
         	answer = new int[] {1};
         }
