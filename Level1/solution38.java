@@ -40,44 +40,29 @@ public class solution39 {
 	public static int solution(String dartResult) {
 		int answer = 0;
 		
-		String one = "";
-		String two = "";
-		String three = "";
 		ArrayList<String> list = new ArrayList<String>();
 		
+		String nStr = "";
 		int cnt = 0;
 		
-		char[] nArr = dartResult.toCharArray();
-		
-		
-		// 첫번째, 두번째, 세번째 점수를 뽑아낸다.
-		for(int i = 0; i < nArr.length; i++) {
-			if((nArr[i] >= 48 && nArr[i] <= 57)) {
+		for(int i = 0; i < dartResult.length(); i++) {
+			// dartResult에서 한글자씩 가져와서 조건문에 들어가는데 아스키코드 참조하여 48~57 이면 (0~9) count를 ++해주면서, nStr이라는 String변수에 해당 값을 더해준다.
+			if(dartResult.charAt(i) >= 48 && dartResult.charAt(i) <= 57) {
 				cnt++;
-				if(cnt == 1) {
-					one = String.valueOf(nArr[i]);
-					list.add(one);
-				} else if(cnt == 2) {
-					two = String.valueOf(nArr[i]);
-					list.add(two);
-				} else {
-					three += String.valueOf(nArr[i]);
-					list.add(three);
-				}
+				nStr += dartResult.charAt(i);
+			// 그게아니라 S,D,T가 들어오면
 			} else {
-				list.add(String.valueOf(nArr[i]));
+				if(cnt > 0) {
+					list.add(nStr);
+					nStr = "";
+					cnt = 0;
+				}
+				list.add(dartResult.charAt(i)+"");
 			}
 		}
 		
-		// 10일 때 char배열에 1,0 으로 담겨서 three에 += 해줬는데 이 상태로 list에 add하면 1, 10 이 add되기 떄문에
-		// list의 i번지가 10이라면 그 앞에있는 애 제거해줘야한다.
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).equals("10")) {
-				list.remove(i-1);
-			}
-		}
+		System.out.println(list);
 		
-		//System.out.println(list);
 		
 		int count = 0;
 		
@@ -164,6 +149,7 @@ public class solution39 {
 					
 					if(list.get(i-4).equals("S")) {
 						if(list.get(i-3).equals("#")) {
+							answer -= (Integer.parseInt(list.get(i-5))*-1);
 							answer += (Integer.parseInt(list.get(i-5))*-1) * 2;
 						} else if(list.get(i-3).equals("*")) {
 							answer -= Integer.parseInt(list.get(i-5)) * 2;
@@ -171,14 +157,16 @@ public class solution39 {
 						}
 					} else if(list.get(i-4).equals("D")) {
 						if(list.get(i-3).equals("#")) {
-							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 2) * -1);
+							answer -= (Math.pow(Integer.parseInt(list.get(i-5)), 2) * -1);
+							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 2) * -1) * 2;
 						} else if(list.get(i-3).equals("*")) {
 							answer -= Math.pow(Integer.parseInt(list.get(i-5)), 2) * 2;
 							answer += Math.pow(Integer.parseInt(list.get(i-5)), 2) * 4;
 						}
 					} else if(list.get(i-4).equals("T")) {
 						if(list.get(i-3).equals("#")) {
-							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1);
+							answer -= (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1);
+							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1) * 2;
 						} else if(list.get(i-3).equals("*")) {
 							answer -= Math.pow(Integer.parseInt(list.get(i-5)), 3) * 2;
 							answer += Math.pow(Integer.parseInt(list.get(i-5)), 3) * 4;
@@ -210,49 +198,56 @@ public class solution39 {
 					
 					if(list.get(i-4).equals("S")) {
 						if(list.get(i-3).equals("#")) {
+							answer -= (Integer.parseInt(list.get(i-5))*-1);
 							answer += (Integer.parseInt(list.get(i-5))*-1) * 2;
 						} else if(list.get(i-3).equals("*")) {
-							answer += Integer.parseInt(list.get(i-5)) * 2;
+							answer -= Integer.parseInt(list.get(i-5)) * 2;
+							answer += Integer.parseInt(list.get(i-5)) * 4;
 						}
 					} else if(list.get(i-4).equals("D")) {
 						if(list.get(i-3).equals("#")) {
+							answer -= (Math.pow(Integer.parseInt(list.get(i-5)), 2) * -1);
 							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 2) * -1) * 2;
 						} else if(list.get(i-3).equals("*")) {
-							answer += Math.pow(Integer.parseInt(list.get(i-5)), 2);
+							answer -= Math.pow(Integer.parseInt(list.get(i-5)), 2) * 2;
+							answer += Math.pow(Integer.parseInt(list.get(i-5)), 2) * 4;
 						}
 					} else if(list.get(i-4).equals("T")) {
 						if(list.get(i-3).equals("#")) {
-							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1);
+							answer -= (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1);
+							answer += (Math.pow(Integer.parseInt(list.get(i-5)), 3) * -1) * 2;
 						} else if(list.get(i-3).equals("*")) {
 							answer -= Math.pow(Integer.parseInt(list.get(i-5)), 3) * 2;
 							answer += Math.pow(Integer.parseInt(list.get(i-5)), 3) * 4;
 						}
 					}
 				}
-		}
+			}
 		}
 		return answer;
 	}
 			
 	
 	public static void main(String[] args) {
-		System.out.println(solution("1S2D*3T")); // =>37
-		//System.out.println("========================================================");
-		System.out.println(solution("1D2S#10S")); // => 9
-		//System.out.println("========================================================");
-		System.out.println(solution("1D2S0T")); // => 3
-		//System.out.println("========================================================");
-		System.out.println(solution("1S*2T*3S")); // => 23
-		//System.out.println("========================================================");
-		System.out.println(solution("1D#2S*3S")); // => 5
-		//System.out.println("========================================================");
-		System.out.println(solution("1T2D3D#")); // => -4
-		//System.out.println("========================================================");
-		System.out.println(solution("1D2S3T*")); // => 59
-		//System.out.println("========================================================");
-		//System.out.println(solution("1D#2S10S*")); // => -1 + 2*2 + 10*2 => -1 + 4 + 20 => 23
-		//System.out.println(solution("1D2S*3T")); // => 1 * 2 + 2 * 2 + 27 => 33
-		//System.out.println(solution("1D*2S*3T*")); // => 1*2*2 + 2*2*2 + 27*2 => 4 + 8 + 54 => 66
+		//System.out.println(solution("1S2D*3T")); // =>37
+		//System.out.println(solution("1D2S#10S")); // => 9
+		//System.out.println(solution("1D2S0T")); // => 3
+		//System.out.println(solution("1S*2T*3S")); // => 23
+		//System.out.println(solution("1D#2S*3S")); // => 5
+		//System.out.println(solution("1T2D3D#")); // => -4
+		//System.out.println(solution("1D2S3T*")); // => 59
+		//System.out.println(solution("10D10T*10S"));
+		//System.out.println(solution("10T#10T*10S"));
+		//System.out.println(solution("10T#10T#10S#"));
+		//System.out.println(solution("9D10T*10S"));
+		//System.out.println(solution("10T#10T#10S#"));
+		//System.out.println(solution("1T#1T#1S#"));
+		//System.out.println(solution("1T#1T#10S#"));
+		//System.out.println(solution("1T1T1S*"));
+		//System.out.println(solution("1T1T1S"));
+		//System.out.println(solution("0T1T1S"));
+		//System.out.println(solution("0T#9T0S*"));
+		System.out.println(solution("10T#10S*10D"));
 	}
 
 }
