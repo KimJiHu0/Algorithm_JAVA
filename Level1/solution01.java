@@ -30,7 +30,7 @@ public class solution01 {
 		  for(int i = nArr.length-1; i >= 0; i--) {
 			  nStr += nArr[i];
 		  }
-		  answer = Integer.parseInt(nStr);
+		  answer = Long.parseLong(nStr);
 		  
 	      return answer;
 	}
